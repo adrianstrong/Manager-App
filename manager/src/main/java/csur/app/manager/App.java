@@ -33,6 +33,9 @@ public class App extends Application {
             stage.setY(event.getScreenY() - yOffset);
         });
 
+    }
+
+    public static void closeWindow() {
         scene.getWindow().setOnCloseRequest(event -> {
             System.exit(0);
         });

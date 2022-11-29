@@ -4,6 +4,7 @@ import csur.app.manager.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -16,9 +17,14 @@ public class Login implements Initializable {
     public TextField usuario;
     @FXML
     public TextField contrasenha;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    }
 
+    @FXML
+    public void btnClose() {
+        System.exit(0);
     }
 
     @FXML
@@ -27,6 +33,6 @@ public class Login implements Initializable {
         login();
     }
     public void login() {
-        App.newStage("hello-view.fxml");
+        App.newStage("Students.fxml");
     }
 }
