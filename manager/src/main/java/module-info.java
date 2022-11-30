@@ -8,11 +8,12 @@ module csur.app.manager {
     requires java.persistence;
     requires lombok;
     requires com.calendarfx.view;
+    requires org.apache.commons.codec;
 
 
     opens csur.app.manager to javafx.fxml , org.hibernate.orm.core, java.sql;
     opens models;
     exports csur.app.manager;
-    exports controller;
-    opens controller to java.sql, javafx.fxml, org.hibernate.orm.core;
+    exports controllers;
+    opens controllers to java.sql, javafx.fxml, org.hibernate.orm.core;
 }

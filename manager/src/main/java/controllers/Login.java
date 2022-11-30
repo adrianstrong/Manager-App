@@ -1,13 +1,10 @@
-package controller;
+package controllers;
 
 import csur.app.manager.App;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +30,6 @@ public class Login implements Initializable {
         login();
     }
     public void login() {
-        App.newStage("Students.fxml");
+        App.newStage("Home.fxml");
     }
 }
