@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2022 23:00:38 by Hibernate Tools 5.5.9.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="railway" name="models.Diario" optimistic-lock="none" table="diario">
+        <id name="id" type="int">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="models.Alumno" fetch="select" name="alumno">
+            <column name="AlumnoID"/>
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column length="10" name="Fecha"/>
+        </property>
+        <property name="tipo" type="string">
+            <column length="5" name="Tipo"/>
+        </property>
+        <property name="horasTrabajadas" type="java.lang.Integer">
+            <column name="HorasTrabajadas"/>
+        </property>
+        <property name="actividad" type="string">
+            <column length="50" name="Actividad"/>
+        </property>
+        <property name="observaciones" type="string">
+            <column length="100" name="Observaciones"/>
+        </property>
+    </class>
+</hibernate-mapping>

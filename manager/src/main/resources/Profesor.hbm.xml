@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2022 23:00:38 by Hibernate Tools 5.5.9.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="railway" name="models.Profesor" optimistic-lock="none" table="profesor">
+        <id name="id" type="int">
+            <column name="ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nombre" type="string">
+            <column length="30" name="Nombre"/>
+        </property>
+        <property name="apellidos" type="string">
+            <column length="30" name="Apellidos"/>
+        </property>
+        <property name="passwordProfesor" type="string">
+            <column length="30" name="PasswordProfesor"/>
+        </property>
+        <property name="email" type="string">
+            <column length="50" name="Email"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="alumnos" table="alumno">
+            <key>
+                <column name="ProfesorID"/>
+            </key>
+            <one-to-many class="models.Alumno"/>
+        </set>
+    </class>
+</hibernate-mapping>
