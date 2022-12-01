@@ -1,79 +1,89 @@
 package models;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Objects;
 
-public class Profesor implements java.io.Serializable {
+@Entity
+@Table(name = "profesor")
+public class Profesor {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "ID")
+    private int id;
+    @Basic
+    @Column(name = "Nombre")
+    private String nombre;
+    @Basic
+    @Column(name = "Apellidos")
+    private String apellidos;
+    @Basic
+    @Column(name = "PasswordProfesor")
+    private String passwordProfesor;
+    @Basic
+    @Column(name = "Email")
+    private String email;
+    @OneToMany(mappedBy = "profesorByProfesorId")
+    private Collection<Alumno> alumnosById;
 
-	private int id;
-	private String nombre;
-	private String apellidos;
-	private String passwordProfesor;
-	private String email;
-	private Set alumnos = new HashSet(0);
+    public int getId() {
+        return id;
+    }
 
-	public Profesor() {
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public Profesor(int id) {
-		this.id = id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public Profesor(int id, String nombre, String apellidos, String passwordProfesor, String email, Set alumnos) {
-		this.id = id;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.passwordProfesor = passwordProfesor;
-		this.email = email;
-		this.alumnos = alumnos;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public int getId() {
-		return this.id;
-	}
+    public String getApellidos() {
+        return apellidos;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
 
-	public String getNombre() {
-		return this.nombre;
-	}
+    public String getPasswordProfesor() {
+        return passwordProfesor;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setPasswordProfesor(String passwordProfesor) {
+        this.passwordProfesor = passwordProfesor;
+    }
 
-	public String getApellidos() {
-		return this.apellidos;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getPasswordProfesor() {
-		return this.passwordProfesor;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profesor that = (Profesor) o;
+        return id == that.id && Objects.equals(nombre, that.nombre) && Objects.equals(apellidos, that.apellidos) && Objects.equals(passwordProfesor, that.passwordProfesor) && Objects.equals(email, that.email);
+    }
 
-	public void setPasswordProfesor(String passwordProfesor) {
-		this.passwordProfesor = passwordProfesor;
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, apellidos, passwordProfesor, email);
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public Collection<Alumno> getAlumnosById() {
+        return alumnosById;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Set getAlumnos() {
-		return this.alumnos;
-	}
-
-	public void setAlumnos(Set alumnos) {
-		this.alumnos = alumnos;
-	}
-
+    public void setAlumnosById(Collection<Alumno> alumnosById) {
+        this.alumnosById = alumnosById;
+    }
 }

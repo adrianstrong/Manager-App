@@ -1,28 +1,56 @@
 package models;
-// Generated 30 nov 2022 23:00:38 by Hibernate Tools 5.5.9.Final
 
-import lombok.Data;
+import javax.persistence.*;
+import java.util.Objects;
 
-@Data
-public class Usuarios implements java.io.Serializable {
+@Entity
+@Table(name = "usuarios", schema = "railway")
+public class Usuarios {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
+    private int id;
+    @Basic
+    @Column(name = "user")
+    private String user;
+    @Basic
+    @Column(name = "password")
+    private String password;
 
-	private Integer id;
-	private String user;
-	private String password;
+    public int getId() {
+        return id;
+    }
 
-	public Usuarios() {
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public Usuarios(String user, String password) {
-		this.user = user;
-		this.password = password;
-	}
+    public String getUser() {
+        return user;
+    }
 
-	@Override
-	public String toString() {
-		return "Usuarios{" +
-				"user='" + user + '\'' +
-				", password='" + password + '\'' +
-				'}';
-	}
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuarios that = (Usuarios) o;
+        return id == that.id && Objects.equals(user, that.user) && Objects.equals(password, that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, user, password);
+    }
 }

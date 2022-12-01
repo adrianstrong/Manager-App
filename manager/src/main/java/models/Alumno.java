@@ -1,164 +1,186 @@
 package models;
 
-import models.Profesor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.Collection;
+import java.util.Objects;
+@Data
+@Entity
+@Table(name = "alumno")
+public class Alumno {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "ID")
+    private int id;
+    @Basic
+    @Column(name = "Nombre")
+    private String nombre;
+    @Basic
+    @Column(name = "Apellidos")
+    private String apellidos;
+    @Basic
+    @Column(name = "PasswordAlumno")
+    private String passwordAlumno;
+    @Basic
+    @Column(name = "DNI")
+    private String dni;
+    @Basic
+    @Column(name = "FechaNacimiento")
+    private Date fechaNacimiento;
+    @Basic
+    @Column(name = "Email")
+    private String email;
+    @Basic
+    @Column(name = "Telefono")
+    private Integer telefono;
+    @Basic
+    @Column(name = "HorasTotalesDual")
+    private Integer horasTotalesDual;
+    @Basic
+    @Column(name = "HorasTotalesFCT")
+    private Integer horasTotalesFct;
+    @Basic
+    @Column(name = "Observaciones")
+    private String observaciones;
+    @ManyToOne
+    @JoinColumn(name = "EmpresaID", referencedColumnName = "ID")
+    private Empresa empresaByEmpresaId;
+    @ManyToOne
+    @JoinColumn(name = "ProfesorID", referencedColumnName = "ID")
+    private Profesor profesorByProfesorId;
+    @OneToMany(mappedBy = "alumnoByAlumnoId")
+    private Collection<Diario> diariosById;
 
-public class Alumno implements java.io.Serializable {
 
-	private int id;
-	private Empresa empresa;
-	private Profesor profesor;
-	private String nombre;
-	private String apellidos;
-	private String passwordAlumno;
-	private String dni;
-	private Date fechaNacimiento;
-	private String email;
-	private Integer telefono;
-	private Integer horasTotalesDual;
-	private Integer horasTotalesFct;
-	private String observaciones;
-	private Set diarios = new HashSet(0);
+/*    public int getId() {
+        return id;
+    }
 
-	public Alumno() {
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public Alumno(int id) {
-		this.id = id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public Alumno(int id, Empresa empresa, Profesor profesor, String nombre, String apellidos, String passwordAlumno,
-			String dni, Date fechaNacimiento, String email, Integer telefono, Integer horasTotalesDual,
-			Integer horasTotalesFct, String observaciones, Set diarios) {
-		this.id = id;
-		this.empresa = empresa;
-		this.profesor = profesor;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.passwordAlumno = passwordAlumno;
-		this.dni = dni;
-		this.fechaNacimiento = fechaNacimiento;
-		this.email = email;
-		this.telefono = telefono;
-		this.horasTotalesDual = horasTotalesDual;
-		this.horasTotalesFct = horasTotalesFct;
-		this.observaciones = observaciones;
-		this.diarios = diarios;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public int getId() {
-		return this.id;
-	}
+    public String getApellidos() {
+        return apellidos;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
 
-	public Empresa getEmpresa() {
-		return this.empresa;
-	}
+    public String getPasswordAlumno() {
+        return passwordAlumno;
+    }
 
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
+    public void setPasswordAlumno(String passwordAlumno) {
+        this.passwordAlumno = passwordAlumno;
+    }
 
-	public Profesor getProfesor() {
-		return this.profesor;
-	}
+    public String getDni() {
+        return dni;
+    }
 
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
-	}
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
-	public String getNombre() {
-		return this.nombre;
-	}
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
-	public String getApellidos() {
-		return this.apellidos;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getPasswordAlumno() {
-		return this.passwordAlumno;
-	}
+    public Integer getTelefono() {
+        return telefono;
+    }
 
-	public void setPasswordAlumno(String passwordAlumno) {
-		this.passwordAlumno = passwordAlumno;
-	}
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
+    }
 
-	public String getDni() {
-		return this.dni;
-	}
+    public Integer getEmpresaId() {
+        return empresaByEmpresaId.getId();
+    }
 
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
+    public void setEmpresaId(Integer empresaId) {
+        this.empresaByEmpresaId.getId() = empresaByEmpresaId.getId();
+    }
 
-	public Date getFechaNacimiento() {
-		return this.fechaNacimiento;
-	}
+    public Integer getProfesorId() {
+        return profesorId;
+    }
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
+    public void setProfesorId(Integer profesorId) {
+        this.profesorId = profesorId;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public Integer getHorasTotalesDual() {
+        return horasTotalesDual;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setHorasTotalesDual(Integer horasTotalesDual) {
+        this.horasTotalesDual = horasTotalesDual;
+    }
 
-	public Integer getTelefono() {
-		return this.telefono;
-	}
+    public Integer getHorasTotalesFct() {
+        return horasTotalesFct;
+    }
 
-	public void setTelefono(Integer telefono) {
-		this.telefono = telefono;
-	}
+    public void setHorasTotalesFct(Integer horasTotalesFct) {
+        this.horasTotalesFct = horasTotalesFct;
+    }
 
-	public Integer getHorasTotalesDual() {
-		return this.horasTotalesDual;
-	}
+    public String getObservaciones() {
+        return observaciones;
+    }
 
-	public void setHorasTotalesDual(Integer horasTotalesDual) {
-		this.horasTotalesDual = horasTotalesDual;
-	}
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
 
-	public Integer getHorasTotalesFct() {
-		return this.horasTotalesFct;
-	}
+    public Empresa getEmpresaByEmpresaId() {
+        return empresaByEmpresaId;
+    }
 
-	public void setHorasTotalesFct(Integer horasTotalesFct) {
-		this.horasTotalesFct = horasTotalesFct;
-	}
+    public void setEmpresaByEmpresaId(Empresa empresaByEmpresaId) {
+        this.empresaByEmpresaId = empresaByEmpresaId;
+    }
 
-	public String getObservaciones() {
-		return this.observaciones;
-	}
+    public Profesor getProfesorByProfesorId() {
+        return profesorByProfesorId;
+    }
 
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
-	}
+    public void setProfesorByProfesorId(Profesor profesorByProfesorId) {
+        this.profesorByProfesorId = profesorByProfesorId;
+    }
 
-	public Set getDiarios() {
-		return this.diarios;
-	}
+    public Collection<Diario> getDiariosById() {
+        return diariosById;
+    }
 
-	public void setDiarios(Set diarios) {
-		this.diarios = diarios;
-	}
-
+    public void setDiariosById(Collection<Diario> diariosById) {
+        this.diariosById = diariosById;
+    }*/
 }

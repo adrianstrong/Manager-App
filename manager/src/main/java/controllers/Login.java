@@ -41,6 +41,6 @@ public class Login implements Initializable {
         contrasenha.setText("");
     }
     public void login() {
-        App.newStage("Home.fxml");
+        App.newStage("Estudiantes.fxml");
     }
 }

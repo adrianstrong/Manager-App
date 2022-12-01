@@ -1,91 +1,88 @@
 package models;
 
-import models.Alumno;
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.Objects;
 
-import java.util.Date;
+@Entity
+@Table(name = "diario")
+public class Diario {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "ID")
+    private int id;
+    @Basic
+    @Column(name = "Fecha")
+    private Date fecha;
+    @Basic
+    @Column(name = "Tipo")
+    private String tipo;
+    @Basic
+    @Column(name = "HorasTrabajadas")
+    private Integer horasTrabajadas;
+    @Basic
+    @Column(name = "Actividad")
+    private String actividad;
+    @Basic
+    @Column(name = "Observaciones")
+    private String observaciones;
+    @ManyToOne
+    @JoinColumn(name = "AlumnoID", referencedColumnName = "ID")
+    private Alumno alumnoByAlumnoId;
 
-public class Diario implements java.io.Serializable {
+    public int getId() {
+        return id;
+    }
 
-	private int id;
-	private Alumno alumno;
-	private Date fecha;
-	private String tipo;
-	private Integer horasTrabajadas;
-	private String actividad;
-	private String observaciones;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public Diario() {
-	}
+    public Date getFecha() {
+        return fecha;
+    }
 
-	public Diario(int id) {
-		this.id = id;
-	}
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
-	public Diario(int id, Alumno alumno, Date fecha, String tipo, Integer horasTrabajadas, String actividad,
-			String observaciones) {
-		this.id = id;
-		this.alumno = alumno;
-		this.fecha = fecha;
-		this.tipo = tipo;
-		this.horasTrabajadas = horasTrabajadas;
-		this.actividad = actividad;
-		this.observaciones = observaciones;
-	}
+    public String getTipo() {
+        return tipo;
+    }
 
-	public int getId() {
-		return this.id;
-	}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Integer getHorasTrabajadas() {
+        return horasTrabajadas;
+    }
 
-	public Alumno getAlumno() {
-		return this.alumno;
-	}
+    public void setHorasTrabajadas(Integer horasTrabajadas) {
+        this.horasTrabajadas = horasTrabajadas;
+    }
 
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
-	}
+    public String getActividad() {
+        return actividad;
+    }
 
-	public Date getFecha() {
-		return this.fecha;
-	}
+    public void setActividad(String actividad) {
+        this.actividad = actividad;
+    }
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+    public String getObservaciones() {
+        return observaciones;
+    }
 
-	public String getTipo() {
-		return this.tipo;
-	}
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+    public Alumno getAlumnoByAlumnoId() {
+        return alumnoByAlumnoId;
+    }
 
-	public Integer getHorasTrabajadas() {
-		return this.horasTrabajadas;
-	}
-
-	public void setHorasTrabajadas(Integer horasTrabajadas) {
-		this.horasTrabajadas = horasTrabajadas;
-	}
-
-	public String getActividad() {
-		return this.actividad;
-	}
-
-	public void setActividad(String actividad) {
-		this.actividad = actividad;
-	}
-
-	public String getObservaciones() {
-		return this.observaciones;
-	}
-
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
-	}
-
+    public void setAlumnoByAlumnoId(Alumno alumnoByAlumnoId) {
+        this.alumnoByAlumnoId = alumnoByAlumnoId;
+    }
 }

@@ -9,15 +9,14 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">vcat8cvqVsE2XLLGJd3z</property>
         <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">none</property>
         <property name="hibernate.search.autoregister_listeners">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
 
-        <mapping resource="Usuarios.hbm.xml"/>
-        <mapping resource="Empresa.hbm.xml"/>
-        <mapping resource="Profesor.hbm.xml"/>
-        <mapping resource="Diario.hbm.xml"/>
-        <mapping resource="Alumno.hbm.xml"/>
+        <mapping class="models.Usuarios"/>
+        <mapping class="models.Alumno"/>
+        <mapping class="models.Diario"/>
+        <mapping class="models.Empresa"/>
+        <mapping class="models.Profesor"/>
 
     </session-factory>
 </hibernate-configuration>

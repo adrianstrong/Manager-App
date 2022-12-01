@@ -1,90 +1,100 @@
 package models;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Objects;
 
-public class Empresa implements java.io.Serializable {
+@Entity
+@Table(name = "empresa")
+public class Empresa {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "ID")
+    private int id;
+    @Basic
+    @Column(name = "Nombre")
+    private String nombre;
+    @Basic
+    @Column(name = "Telefono")
+    private Integer telefono;
+    @Basic
+    @Column(name = "Email")
+    private String email;
+    @Basic
+    @Column(name = "Responsable")
+    private String responsable;
+    @Basic
+    @Column(name = "Observaciones")
+    private String observaciones;
+    @OneToMany(mappedBy = "empresaByEmpresaId")
+    private Collection<Alumno> alumnosById;
 
-	private int id;
-	private String nombre;
-	private Integer telefono;
-	private String email;
-	private String responsable;
-	private String observaciones;
-	private Set alumnos = new HashSet(0);
+    public int getId() {
+        return id;
+    }
 
-	public Empresa() {
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public Empresa(int id) {
-		this.id = id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public Empresa(int id, String nombre, Integer telefono, String email, String responsable, String observaciones,
-			Set alumnos) {
-		this.id = id;
-		this.nombre = nombre;
-		this.telefono = telefono;
-		this.email = email;
-		this.responsable = responsable;
-		this.observaciones = observaciones;
-		this.alumnos = alumnos;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public int getId() {
-		return this.id;
-	}
+    public Integer getTelefono() {
+        return telefono;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
+    }
 
-	public String getNombre() {
-		return this.nombre;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public Integer getTelefono() {
-		return this.telefono;
-	}
+    public String getResponsable() {
+        return responsable;
+    }
 
-	public void setTelefono(Integer telefono) {
-		this.telefono = telefono;
-	}
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public String getObservaciones() {
+        return observaciones;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
 
-	public String getResponsable() {
-		return this.responsable;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Empresa that = (Empresa) o;
+        return id == that.id && Objects.equals(nombre, that.nombre) && Objects.equals(telefono, that.telefono) && Objects.equals(email, that.email) && Objects.equals(responsable, that.responsable) && Objects.equals(observaciones, that.observaciones);
+    }
 
-	public void setResponsable(String responsable) {
-		this.responsable = responsable;
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, telefono, email, responsable, observaciones);
+    }
 
-	public String getObservaciones() {
-		return this.observaciones;
-	}
+    public Collection<Alumno> getAlumnosById() {
+        return alumnosById;
+    }
 
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
-	}
-
-	public Set getAlumnos() {
-		return this.alumnos;
-	}
-
-	public void setAlumnos(Set alumnos) {
-		this.alumnos = alumnos;
-	}
-
+    public void setAlumnosById(Collection<Alumno> alumnosById) {
+        this.alumnosById = alumnosById;
+    }
 }
