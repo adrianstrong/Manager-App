@@ -1,5 +1,7 @@
 package models;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
@@ -11,6 +13,9 @@ public class Diario {
     @Id
     @Column(name = "ID")
     private int id;
+    @Basic
+    @Column(name = "AlumnoID" , insertable = false, updatable = false)
+    private Integer alumnoId;
     @Basic
     @Column(name = "Fecha")
     private Date fecha;
@@ -29,6 +34,8 @@ public class Diario {
     @ManyToOne
     @JoinColumn(name = "AlumnoID", referencedColumnName = "ID")
     private Alumno alumnoByAlumnoId;
+
+    @Formula(" horas trabajas - 200 ")
 
     public int getId() {
         return id;

@@ -3,6 +3,7 @@ package models;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -35,6 +36,9 @@ public class Alumno {
     @Column(name = "Email")
     private String email;
     @Basic
+    @Column(name = "ProfesorID", insertable = false, updatable = false)
+    private Integer profesorId;
+    @Basic
     @Column(name = "Telefono")
     private Integer telefono;
     @Basic
@@ -54,7 +58,6 @@ public class Alumno {
     private Profesor profesorByProfesorId;
     @OneToMany(mappedBy = "alumnoByAlumnoId")
     private Collection<Diario> diariosById;
-
 
 /*    public int getId() {
         return id;

@@ -10,7 +10,6 @@ module csur.app.manager {
     requires com.calendarfx.view;
     requires org.apache.commons.codec;
 
-
     opens csur.app.manager to javafx.fxml , org.hibernate.orm.core, java.sql;
     opens models;
     exports csur.app.manager;

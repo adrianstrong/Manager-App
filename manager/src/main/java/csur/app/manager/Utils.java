@@ -2,6 +2,9 @@ package csur.app.manager;
 
 import java.time.LocalDateTime;
 
+import controllers.SessionData;
+import models.Alumno;
+import models.Profesor;
 import org.apache.commons.codec.digest.DigestUtils;
 import csur.app.manager.HibernateUtil;
 import org.hibernate.Session;
@@ -25,9 +28,24 @@ public class Utils {
         s = HibernateUtil.getSessionFactory().openSession();
 
         try {
-            return s.createQuery("FROM Usuarios u WHERE u.user = :user AND u.password = :password")
+            var existeAlumno = s.createQuery("FROM Alumno a WHERE a.email = :user AND a.passwordAlumno = :password")
                     .setParameter("user", user)
-                    .setParameter("password", DigestUtils.md5Hex(password)).getSingleResult() != null;
+                    .setParameter("password", DigestUtils.md5Hex(password)).getResultList();
+
+            var existeProfesor = s.createQuery("FROM Profesor a WHERE a.email = :user AND a.passwordProfesor = :password")
+                    .setParameter("user", user)
+                    .setParameter("password", DigestUtils.md5Hex(password)).getResultList();
+
+            if (existeAlumno.size() >= 1) {
+                SessionData.setContextoAdmin(false);
+                SessionData.setAlumno((Alumno) existeAlumno.get(0));
+                return true;
+            } else if (existeProfesor.size() >= 1) {
+                SessionData.setContextoAdmin(true);
+                SessionData.setProfesor((Profesor) existeProfesor.get(0));
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }

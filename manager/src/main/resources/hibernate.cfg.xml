@@ -5,9 +5,9 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://@containers-us-west-111.railway.app:6987/railway</property>
+        <property name="hibernate.connection.url">jdbc:mysql://containers-us-west-111.railway.app:6987/railway</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">vcat8cvqVsE2XLLGJd3z</property>
+        <property name="hibernate.connection.password">5CTMOxj7sq6sM5zB8LtY</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.search.autoregister_listeners">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>

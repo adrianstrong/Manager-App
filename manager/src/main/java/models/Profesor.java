@@ -10,7 +10,7 @@ public class Profesor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
-    private int id;
+    public int id;
     @Basic
     @Column(name = "Nombre")
     private String nombre;
@@ -23,8 +23,9 @@ public class Profesor {
     @Basic
     @Column(name = "Email")
     private String email;
+
     @OneToMany(mappedBy = "profesorByProfesorId")
-    private Collection<Alumno> alumnosById;
+    public Collection<Alumno> alumnosById;
 
     public int getId() {
         return id;

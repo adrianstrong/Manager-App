@@ -27,7 +27,7 @@ public class Empresa {
     @Column(name = "Observaciones")
     private String observaciones;
     @OneToMany(mappedBy = "empresaByEmpresaId")
-    private Collection<Alumno> alumnosById;
+    public Collection<Alumno> alumnosById;
 
     public int getId() {
         return id;
@@ -49,7 +49,7 @@ public class Empresa {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono() {
         this.telefono = telefono;
     }
 
