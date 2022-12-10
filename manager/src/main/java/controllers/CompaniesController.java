@@ -73,6 +73,7 @@ public class CompaniesController implements Initializable {
 
         btnGoBack.setOnMouseClicked(event -> {
             App.newStage("Home.fxml");
+            btnGoBack.getScene().getWindow().hide();
             SessionData.setAlumno(null);
             SessionData.setEmpresa(null);
         });

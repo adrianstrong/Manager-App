@@ -21,7 +21,6 @@ public class NewStudentController implements Initializable {
     @FXML public TextField inputDNI;
     @FXML public Button btnGuardar;
     Session s = HibernateUtil.getSessionFactory().openSession();
-    Alumno alumnoSeleccionado = SessionData.getAlumno();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
