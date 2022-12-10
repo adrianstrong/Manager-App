@@ -1,11 +1,8 @@
 package controllers;
 
-import csur.app.manager.HibernateUtil;
-import csur.app.manager.Utils;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import models.Alumno;
 import models.Empresa;
 import org.hibernate.Session;
 

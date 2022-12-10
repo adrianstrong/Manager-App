@@ -1,7 +1,5 @@
 package controllers;
 
-import csur.app.manager.HibernateUtil;
-import csur.app.manager.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

@@ -58,7 +58,12 @@
         <buttons>
             <Button fx:id="btnAddActvidad" mnemonicParsing="false" onAction="#ActionAddActividad" prefHeight="25.0" prefWidth="105.0" text="Añadir Actividad" /> <!--onAction="#btnActivities"-->
             <Button fx:id="btnBorrarActividad" mnemonicParsing="false" onAction="#ActionBorrarActividad" text="Borrar Actividad" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Editar Actividad" />
+            <Button fx:id="btnEditarActividad" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Editar Actividad" />
+            <ImageView fx:id="btnRefresh" fitHeight="28.0" fitWidth="28.0" layoutX="107.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../../../refresh.png" />
+                </image>
+            </ImageView>
         </buttons>
     </ButtonBar>
       <VBox layoutX="91.0" layoutY="153.0" prefHeight="312.0" prefWidth="185.0">

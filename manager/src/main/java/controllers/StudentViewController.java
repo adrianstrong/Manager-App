@@ -34,8 +34,9 @@ public class StudentViewController implements Initializable {
     public TextField inputHorasTrabajas;
     public TextField inputFecha;
     public TextArea inputObs;
-    public ImageView btnGoBack;
     public ImageView btnClose;
+    public ImageView btnRefresh;
+    public Button btnEditarActividad;
 
     Session s = HibernateUtil.getSessionFactory().openSession();
     Query filtrado;
@@ -57,6 +58,13 @@ public class StudentViewController implements Initializable {
 
         updateTable();
 
+        btnEditarActividad.setOnAction(event -> {
+            if (tableActivities.getSelectionModel().getSelectedItem() != null) {
+                App.newStage("ModificarActividad.fxml");
+            }
+        });
+
+
         tableActivities.getSelectionModel().selectedItemProperty().addListener((newSelection) -> {
             if (newSelection != null) {
                 SessionData.setDiario((Diario) tableActivities.getSelectionModel().getSelectedItem());
@@ -67,6 +75,9 @@ public class StudentViewController implements Initializable {
             System.exit(0);
         });
 
+        btnRefresh.setOnMouseClicked(event -> {
+            updateTable();
+        });
     }
 
 

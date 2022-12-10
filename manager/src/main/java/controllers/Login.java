@@ -7,7 +7,6 @@ import csur.app.manager.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.Session;
 
 import java.net.URL;

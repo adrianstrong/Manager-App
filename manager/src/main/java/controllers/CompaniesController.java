@@ -47,12 +47,16 @@ public class CompaniesController implements Initializable {
     static Session s = HibernateUtil.getSessionFactory().openSession();
     public ImageView btnGoBack;
     public ImageView btnClose;
+    public ImageView btnRefresh;
+    public Label lblUsuario;
 
     Query empresas;
     Query alumnos;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        lblUsuario.setText(SessionData.getProfesor().getEmail());
+
         colComID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colComNam.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         colComTlf.setCellValueFactory(new PropertyValueFactory<>("Telefono"));
@@ -82,6 +86,12 @@ public class CompaniesController implements Initializable {
             System.exit(0);
         });
 
+        btnRefresh.setOnMouseClicked(event -> {
+            empresas = s.createQuery("from Empresa");
+            tableCompanies.setItems(FXCollections.observableArrayList(s.createQuery("from Empresa").getResultList()));
+            alumnos = s.createQuery("from Alumno");
+            tableAlumnos.setItems(FXCollections.observableArrayList(s.createQuery("from Alumno").getResultList()));
+        });
 
         tableCompanies.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -145,39 +155,5 @@ public class CompaniesController implements Initializable {
             App.newStage("ModificarEmpresa.fxml");
         }
     }
-
-/*
-    public void btnDelete() {
-        deleteAlumnoFromList();
-        updateTable();
-    }
-
-    public void deleteAlumnoFromList() {
-        if (tableStudents.getSelectionModel() != null) {
-            Alumno alumnoSeleccionado = (Alumno) tableStudents.getSelectionModel().getSelectedItem();
-            try {
-                s.beginTransaction();
-                s.delete(alumnoSeleccionado);
-                s.getTransaction().commit();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    }
-
-    public void btnActivities(ActionEvent actionEvent) {
-        SessionData.setAlumno((Alumno) tableStudents.getSelectionModel().getSelectedItem());
-        //fillActivities();
-        App.newStage("Actividades.fxml");
-    }
-
-    public void btnCrearAlumno(ActionEvent actionEvent) {
-        App.newStage("NuevoAlumno.fxml");
-    }
-
-    public void btnModificarAlumno(ActionEvent actionEvent) {
-        SessionData.setAlumno((Alumno) tableStudents.getSelectionModel().getSelectedItem());
-        App.newStage("ModificarAlumno.fxml");
-    }*/
 
 }

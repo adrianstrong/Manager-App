@@ -193,6 +193,11 @@
       <Button layoutX="24.0" layoutY="475.0" mnemonicParsing="false" onAction="#agregarEmpresa" prefHeight="25.0" prefWidth="193.0" text="Agregar Empresa" />
       <Button layoutX="24.0" layoutY="509.0" mnemonicParsing="false" onAction="#modificarEmpresa" prefHeight="25.0" prefWidth="193.0" text="Modificar Empresa" />
       <Button layoutX="24.0" layoutY="543.0" mnemonicParsing="false" onAction="#eliminarEmpresa" prefHeight="25.0" prefWidth="193.0" text="Eliminar Empresa" />
+      <ImageView fx:id="btnRefresh" fitHeight="28.0" fitWidth="28.0" layoutX="107.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../refresh.png" />
+         </image>
+      </ImageView>
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />
