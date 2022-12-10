@@ -7,16 +7,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import models.Alumno;
-import models.Diario;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import javax.persistence.Query;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class StudentsController implements Initializable {
@@ -69,11 +70,12 @@ public class StudentsController implements Initializable {
     public TableColumn colActivities;
     @FXML
     public TableColumn colObservations;
-    Session s = HibernateUtil.getSessionFactory().openSession();
+    static Session s = HibernateUtil.getSessionFactory().openSession();
+    public ImageView btnGoBack;
+    public ImageView btnClose;
     Query filtrado;
     Query todos;
 
-    ObservableList actividadesAlumno = FXCollections.observableArrayList();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -81,14 +83,21 @@ public class StudentsController implements Initializable {
 
         filtrado = s.createQuery("from Alumno a WHERE a.profesorId= :id")
                 .setParameter("id", SessionData.getProfesor().getId());
-
         todos = s.createQuery("from Alumno");
 
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         colLastName.setCellValueFactory(new PropertyValueFactory<>("Apellidos"));
 
+        btnGoBack.setOnMouseClicked(event -> {
+            App.newStage("Home.fxml");
+            SessionData.setAlumno(null);
+            SessionData.setEmpresa(null);
+        });
 
+        btnClose.setOnMouseClicked(event -> {
+            System.exit(0);
+        });
 
         updateTable();
 
@@ -100,7 +109,7 @@ public class StudentsController implements Initializable {
         });
 
         chkAsignados.selectedProperty().addListener((newSelection) -> {
-            if(chkAsignados.isSelected()) {
+            if (chkAsignados.isSelected()) {
                 tableStudents.setItems(FXCollections.observableArrayList(filtrado.getResultList()));
             } else {
                 tableStudents.setItems(FXCollections.observableArrayList(todos.getResultList()));
@@ -109,58 +118,74 @@ public class StudentsController implements Initializable {
 
     }
 
-    public void updateTable(){
+    public void updateTable() {
         tableStudents.getItems().clear();
 
-        tableStudents.getItems().addAll(filtrado.getResultList());
-
-    }
-
-    public void fillDetails() {
-            if (tableStudents.getSelectionModel() != null) {
-            Alumno alumnoSeleccionado = (Alumno) tableStudents.getSelectionModel().getSelectedItem();
-
-            lblNombreAlumno.setText(alumnoSeleccionado.getNombre() + " " + alumnoSeleccionado.getApellidos());
-            lblDniAlumno.setText(alumnoSeleccionado.getDni());
-            lblNacimientoAlumno.setText(alumnoSeleccionado.getFechaNacimiento().toString());
-            lblCorreoAlumno.setText(alumnoSeleccionado.getEmail());
-            lblTelefonoAlumno.setText(alumnoSeleccionado.getTelefono().toString());
-
-            lblNombreEmpresa.setText(alumnoSeleccionado.getEmpresaByEmpresaId().getNombre());
-            lblNombreResponsableEmpresa.setText(alumnoSeleccionado.getEmpresaByEmpresaId().getResponsable());
-            lblCorreoEmpresa.setText(alumnoSeleccionado.getEmpresaByEmpresaId().getEmail());
-            lblTelefonoEmpresa.setText(alumnoSeleccionado.getEmpresaByEmpresaId().getTelefono().toString());
-
-            lblHorasTotalDual.setText(alumnoSeleccionado.getHorasTotalesDual().toString());
-            lblHorasRealizadasDual.setText(alumnoSeleccionado.getHorasTotalesFct().toString());
-            lblHorasTotalFct.setText(alumnoSeleccionado.getHorasTotalesFct().toString());
-            lblHorasRealizadasFct.setText(alumnoSeleccionado.getHorasTotalesFct().toString());
+        if (chkAsignados.isSelected()) {
+            tableStudents.setItems(FXCollections.observableArrayList(filtrado.getResultList()));
+        } else {
+            tableStudents.setItems(FXCollections.observableArrayList(todos.getResultList()));
         }
     }
 
-    public void fillActivities(){
+    public void fillDetails() {
         if (tableStudents.getSelectionModel() != null) {
             Alumno alumnoSeleccionado = (Alumno) tableStudents.getSelectionModel().getSelectedItem();
 
-            colDate.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-            colTipo.setCellValueFactory(new PropertyValueFactory<>("Tipo"));
-            colWorkedHours.setCellValueFactory(new PropertyValueFactory<>("HorasTrabajadas"));
-            colActivities.setCellValueFactory(new PropertyValueFactory<>("Actividad"));
-            colObservations.setCellValueFactory(new PropertyValueFactory<>("Observaciones"));
+            try {
+                lblNombreAlumno.setText(alumnoSeleccionado.getNombre() + " " + alumnoSeleccionado.getApellidos());
+                lblDniAlumno.setText(alumnoSeleccionado.getDni());
+                lblNacimientoAlumno.setText(alumnoSeleccionado.getFechaNacimiento().toString());
+                lblCorreoAlumno.setText(alumnoSeleccionado.getEmail());
+                lblTelefonoAlumno.setText(alumnoSeleccionado.getTelefono().toString());
 
-            Query actividades = s.createQuery("from Diario d WHERE d.alumnoId = :id")
-                    .setParameter("id", alumnoSeleccionado.getId());
+                lblNombreEmpresa.setText(alumnoSeleccionado.getEmpresaByEmpresaId().getNombre());
+                lblNombreResponsableEmpresa.setText(alumnoSeleccionado.getEmpresaByEmpresaId().getResponsable());
+                lblCorreoEmpresa.setText(alumnoSeleccionado.getEmpresaByEmpresaId().getEmail());
+                lblTelefonoEmpresa.setText(alumnoSeleccionado.getEmpresaByEmpresaId().getTelefono().toString());
 
-            actividadesAlumno.add(actividades.getResultList());
+                lblHorasTotalDual.setText(alumnoSeleccionado.getHorasTotalesDual().toString());
+                lblHorasRealizadasDual.setText(alumnoSeleccionado.getHorasTotalesFct().toString());
+                lblHorasTotalFct.setText(alumnoSeleccionado.getHorasTotalesFct().toString());
+                lblHorasRealizadasFct.setText(alumnoSeleccionado.getHorasTotalesFct().toString());
+            } catch (NullPointerException e) {
+                System.out.println(e);
+            }
 
-            tableActivities.getItems().addAll(actividadesAlumno);
+        }
+    }
+
+    public void btnDelete() {
+        deleteAlumnoFromList();
+        updateTable();
+    }
+
+    public void deleteAlumnoFromList() {
+        if (tableStudents.getSelectionModel() != null) {
+            Alumno alumnoSeleccionado = (Alumno) tableStudents.getSelectionModel().getSelectedItem();
+            try {
+                s.beginTransaction();
+                s.delete(alumnoSeleccionado);
+                s.getTransaction().commit();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 
     public void btnActivities(ActionEvent actionEvent) {
-        fillActivities();
+        SessionData.setAlumno((Alumno) tableStudents.getSelectionModel().getSelectedItem());
+        //fillActivities();
         App.newStage("Actividades.fxml");
     }
 
+    public void btnCrearAlumno(ActionEvent actionEvent) {
+        App.newStage("NuevoAlumno.fxml");
+    }
+
+    public void btnModificarAlumno(ActionEvent actionEvent) {
+        SessionData.setAlumno((Alumno) tableStudents.getSelectionModel().getSelectedItem());
+        App.newStage("ModificarAlumno.fxml");
+    }
 
 }

@@ -1,10 +1,13 @@
 package models;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@NoArgsConstructor
 @Table(name = "empresa")
 public class Empresa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +19,7 @@ public class Empresa {
     private String nombre;
     @Basic
     @Column(name = "Telefono")
-    private Integer telefono;
+    private String telefono;
     @Basic
     @Column(name = "Email")
     private String email;
@@ -28,6 +31,14 @@ public class Empresa {
     private String observaciones;
     @OneToMany(mappedBy = "empresaByEmpresaId")
     public Collection<Alumno> alumnosById;
+
+    public Empresa(String Nombre, String Telefono, String Email, String Responsanle, String Observaciones) {
+        this.nombre = Nombre;
+        this.telefono = Telefono;
+        this.email = Email;
+        this.responsable = Responsanle;
+        this.observaciones = Observaciones;
+    }
 
     public int getId() {
         return id;
@@ -45,11 +56,11 @@ public class Empresa {
         this.nombre = nombre;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono() {
+    public void setTelefono(String text) {
         this.telefono = telefono;
     }
 

@@ -1,16 +1,18 @@
 package models;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
-@Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 @Entity
+
 @Table(name = "alumno")
 public class Alumno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +33,7 @@ public class Alumno {
     private String dni;
     @Basic
     @Column(name = "FechaNacimiento")
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     @Basic
     @Column(name = "Email")
     private String email;
@@ -40,7 +42,7 @@ public class Alumno {
     private Integer profesorId;
     @Basic
     @Column(name = "Telefono")
-    private Integer telefono;
+    private String telefono;
     @Basic
     @Column(name = "HorasTotalesDual")
     private Integer horasTotalesDual;
@@ -58,6 +60,19 @@ public class Alumno {
     private Profesor profesorByProfesorId;
     @OneToMany(mappedBy = "alumnoByAlumnoId")
     private Collection<Diario> diariosById;
+
+    public Alumno(String Nombre, String Apellidos , String Password, String DNI, String FechaNacimiento, String Email, String Telefono, String Observaciones){
+        this.nombre = Nombre;
+        this.apellidos = Apellidos;
+        this.passwordAlumno = Password;
+        this.dni = DNI;
+        this.fechaNacimiento = FechaNacimiento;
+        this.email = Email;
+        this.telefono = Telefono;
+        this.observaciones = Observaciones;
+    }
+
+    }
 
 /*    public int getId() {
         return id;
@@ -186,4 +201,3 @@ public class Alumno {
     public void setDiariosById(Collection<Diario> diariosById) {
         this.diariosById = diariosById;
     }*/
-}

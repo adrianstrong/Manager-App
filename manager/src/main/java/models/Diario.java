@@ -1,11 +1,11 @@
 package models;
 
+import lombok.Data;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
-
 @Entity
 @Table(name = "diario")
 public class Diario {
@@ -18,7 +18,7 @@ public class Diario {
     private Integer alumnoId;
     @Basic
     @Column(name = "Fecha")
-    private Date fecha;
+    public String fecha;
     @Basic
     @Column(name = "Tipo")
     private String tipo;
@@ -35,8 +35,6 @@ public class Diario {
     @JoinColumn(name = "AlumnoID", referencedColumnName = "ID")
     private Alumno alumnoByAlumnoId;
 
-    @Formula(" horas trabajas - 200 ")
-
     public int getId() {
         return id;
     }
@@ -45,11 +43,11 @@ public class Diario {
         this.id = id;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

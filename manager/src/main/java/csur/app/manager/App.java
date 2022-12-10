@@ -23,6 +23,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
+
         scene.getRoot().setOnMousePressed(event -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
@@ -58,7 +59,6 @@ public class App extends Application {
         }
 
     }
-
 
     public static void main(String[] args) {
         launch();

@@ -51,10 +51,8 @@ public class Utils {
         }
 
     }
-
-    public String strMD5(String str) {
+    public static String strMD5(String str) {
         return DigestUtils.md5Hex(str);
     }
-
 
 }

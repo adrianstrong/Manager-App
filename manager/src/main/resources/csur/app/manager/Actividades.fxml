@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentsActivitiesController">
    <children>
       <Pane layoutY="-5.0" prefHeight="81.0" prefWidth="600.0" style="-fx-background-color: #326da8;">
          <children>
@@ -38,7 +37,7 @@
          <children>
             <TableView fx:id="tableActivities" prefHeight="312.0" prefWidth="582.0">
               <columns>
-                <TableColumn fx:id="colDate" prefWidth="95.0" text="Fecha" />
+                <TableColumn fx:id="colDate" prefWidth="95.0" text="Fecha"/>
                 <TableColumn fx:id="colTipo" prefWidth="135.0" text="Tipo" />
                   <TableColumn fx:id="colWorkedHours" prefWidth="111.0" text="Horas Trabajadas" />
                   <TableColumn fx:id="colActivities" prefWidth="53.0" text="Actividad" />

@@ -41,7 +41,7 @@ public class SessionData {
         return diario;
     }
 
-    public static void setADiario(Diario diario) {
+    public static void setDiario(Diario diario) {
         SessionData.diario = diario;
     }
 

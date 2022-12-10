@@ -9,6 +9,8 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -24,16 +26,26 @@
                   <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <Label layoutX="772.0" layoutY="8.0" prefHeight="38.0" prefWidth="157.0" text="Logueado como: " textFill="WHITE">
+            <Label layoutX="696.0" layoutY="1.0" prefHeight="38.0" prefWidth="157.0" text="Bienvenido " textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lblUsuario" layoutX="772.0" layoutY="36.0" prefHeight="38.0" prefWidth="157.0" textFill="WHITE">
+            <Label fx:id="lblUsuario" layoutX="674.0" layoutY="27.0" prefHeight="38.0" prefWidth="200.0" textFill="WHITE">
                <font>
                   <Font name="Leelawadee UI Semilight" size="20.0" />
                </font>
             </Label>
+            <ImageView fx:id="btnGoBack" fitHeight="28.0" fitWidth="28.0" layoutX="874.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../flecha-izquierda.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnClose" fitHeight="35.0" fitWidth="35.0" layoutX="902.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../close-icon.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <TableView fx:id="tableStudents" layoutX="428.0" layoutY="144.0" prefHeight="448.0" prefWidth="489.0">
@@ -174,11 +186,12 @@
       </VBox>
       <ButtonBar layoutX="-9.0" layoutY="494.0" prefHeight="60.0" prefWidth="400.0">
         <buttons>
-          <Button fx:id="btnActivities" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Ver Actividades" /> <!--onAction="#btnActivities"-->
-            <Button mnemonicParsing="false" text="Borrar Alumno" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Modificar Alumno" />
+          <Button fx:id="btnActivities" mnemonicParsing="false" onAction="#btnActivities" prefHeight="25.0" prefWidth="105.0" text="Ver Actividades" />
+            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDelete" text="Borrar Alumno" />
+            <Button fx:id="btnModificarAlumno" mnemonicParsing="false" onAction="#btnModificarAlumno" prefHeight="25.0" prefWidth="117.0" text="Modificar Alumno" />
         </buttons>
       </ButtonBar>
+      <Button fx:id="btnCrearAlumno" layoutX="147.0" layoutY="554.0" mnemonicParsing="false" onAction="#btnCrearAlumno" prefHeight="25.0" prefWidth="119.0" text="Crear Alumno" />
 
    </children>
    <cursor>
